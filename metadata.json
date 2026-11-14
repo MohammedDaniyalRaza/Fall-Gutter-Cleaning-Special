@@ -1,0 +1,6 @@
+{
+  "name": "Peakline Home Services",
+  "description": "Professional gutter cleaning, repair, hidden hanger installation, and end cap resealing serving Western Massachusetts and Connecticut.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,171 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-sans: "Instrument Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-navy-950: #091429;
+  --color-navy-900: #0F1F3D;
+  --color-navy-800: #14284B;
+  --color-navy-700: #1E3A68;
+
+  --color-orange-500: #F26A1B;
+  --color-orange-400: #FF8A3D;
+  --color-orange-600: #D9570E;
+
+  --color-cream: #F6F4F0;
+  --color-slate-cool: #6B7686;
+  --color-slate-line: #D9DEE5;
+  --color-sky-water: #3B82C4;
+}
+
+:root {
+  --bg-cream: #F6F4F0;
+  --bg-white: #FFFFFF;
+  --bg-navy: #0F1F3D;
+  --bg-navy-light: #14284B;
+  --accent-orange: #F26A1B;
+  --accent-orange-hover: #FF8A3D;
+  --accent-sky: #3B82C4;
+  --text-navy: #0F1F3D;
+  --text-muted: #6B7686;
+  --border-cool: #D9DEE5;
+}
+
+@layer base {
+  html,
+  body {
+    overflow-x: clip;
+    max-width: 100%;
+    font-family: var(--font-sans);
+    background-color: var(--bg-cream);
+    color: var(--text-navy);
+    scroll-behavior: auto;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+}
+
+/* Custom utility patterns */
+.topo-texture-light {
+  background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%230F1F3D' stroke-opacity='0.045' stroke-width='1'%3E%3Cpath d='M-20 80 Q 80 20 180 75 T 420 65'/%3E%3Cpath d='M-20 120 Q 100 50 200 110 T 420 105'/%3E%3Cpath d='M-20 165 Q 110 95 220 155 T 420 145'/%3E%3Cpath d='M-20 215 Q 90 150 230 205 T 420 190'/%3E%3Cpath d='M-20 270 Q 120 200 250 255 T 420 240'/%3E%3Cpath d='M-20 325 Q 130 265 260 315 T 420 305'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 400px 400px;
+}
+
+.topo-texture-dark {
+  background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23FFFFFF' stroke-opacity='0.055' stroke-width='1'%3E%3Cpath d='M-20 75 Q 90 15 195 70 T 420 60'/%3E%3Cpath d='M-20 125 Q 110 55 215 115 T 420 105'/%3E%3Cpath d='M-20 175 Q 105 110 230 165 T 420 150'/%3E%3Cpath d='M-20 230 Q 120 165 245 220 T 420 205'/%3E%3Cpath d='M-20 285 Q 115 225 260 275 T 420 265'/%3E%3Cpath d='M-20 345 Q 130 285 270 330 T 420 320'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 400px 400px;
+}
+
+/* Peak roofline frame clip-path */
+.clip-peak-frame {
+  clip-path: polygon(0% 18%, 48% 0%, 100% 18%, 100% 100%, 0% 100%);
+}
+
+.clip-ridge-card {
+  clip-path: polygon(0% 8%, 35% 0%, 100% 6%, 100% 100%, 0% 100%);
+}
+
+/* Shimmer loading state */
+@keyframes peak-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    #14284b 0%,
+    #1e3a68 50%,
+    #14284b 100%
+  );
+  background-size: 200% 100%;
+  animation: peak-shimmer 1.6s infinite linear;
+}
+
+/* Custom scrollbar for dropdowns */
+.peak-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.peak-scrollbar::-webkit-scrollbar-track {
+  background: #0f1f3d;
+}
+.peak-scrollbar::-webkit-scrollbar-thumb {
+  background: #2c4a7c;
+  border-radius: 3px;
+}
+.peak-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #f26a1b;
+}
+
+/* Marquee ticker animation */
+@keyframes marquee-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 34s linear infinite;
+}
+
+@keyframes fall-leaf {
+  0% {
+    transform: translate3d(0, -10px, 0) rotate(0deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.78;
+  }
+  85% {
+    opacity: 0.78;
+  }
+  100% {
+    transform: translate3d(28px, 460px, 0) rotate(220deg);
+    opacity: 0;
+  }
+}
+
+.animate-fall-leaf {
+  animation: fall-leaf 10s linear infinite;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-fall-leaf {
+    animation: none;
+  }
+  .animate-fall-leaf {
+    display: none;
+  }
+  .skeleton-shimmer {
+    animation: none;
+  }
+}
+
+/* Shake animation for invalid form field */
+@keyframes field-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.animate-shake {
+  animation: field-shake 0.35s ease-in-out;
+}
